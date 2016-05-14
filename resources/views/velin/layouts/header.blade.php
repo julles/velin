@@ -42,84 +42,26 @@
                             </li>
                         </ul>
                         <ul class="nav">
-                            <li class="active">
-                                <a href="{{ asset(null) }}/velin/#">Dashboard</a>
+                        @foreach($parentMenus as $parent)
+                        @if($parent->childs()->count() == 0)
+                            <li>
+                                <a href = "{{ Velin::urlBackend($parent->slug) }}">{{ $parent->title }}</a>
                             </li>
+                        @else    
                             <li class="dropdown">
-                                <a href="{{ asset(null) }}/velin/#" data-toggle="dropdown" class="dropdown-toggle">Settings <b class="caret"></b>
-
-                                </a>
-                                <ul class="dropdown-menu" id="menu1">
-                                    <li>
-                                        <a href="{{ asset(null) }}/velin/#">Tools <i class="icon-arrow-right"></i>
-
-                                        </a>
-                                        <ul class="dropdown-menu sub-menu">
-                                            <li>
-                                                <a href="{{ asset(null) }}/velin/#">Reports</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ asset(null) }}/velin/#">Logs</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ asset(null) }}/velin/#">Errors</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="{{ asset(null) }}/velin/#">SEO Settings</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ asset(null) }}/velin/#">Other Link</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="{{ asset(null) }}/velin/#">Other Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ asset(null) }}/velin/#">Other Link</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="{{ asset(null) }}/velin/#" role="button" class="dropdown-toggle" data-toggle="dropdown">Content <i class="caret"></i>
-
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                                    {{ $parent->title }} <i class="caret"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a tabindex="-1" href="{{ asset(null) }}/velin/#">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="{{ asset(null) }}/velin/#">News</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="{{ asset(null) }}/velin/#">Custom Pages</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="{{ asset(null) }}/velin/#">Calendar</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a tabindex="-1" href="{{ asset(null) }}/velin/#">FAQ</a>
-                                    </li>
+                                    @foreach($parent->childs as $child)
+                                        <li>
+                                            <a tabindex="-1" href="{{ Velin::urlBackend($child->slug) }}">{{ $child->title }}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="{{ asset(null) }}/velin/#" role="button" class="dropdown-toggle" data-toggle="dropdown">Users <i class="caret"></i>
-
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a tabindex="-1" href="{{ asset(null) }}/velin/#">User List</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="{{ asset(null) }}/velin/#">Search</a>
-                                    </li>
-                                    <li>
-                                        <a tabindex="-1" href="{{ asset(null) }}/velin/#">Permissions</a>
-                                    </li>
-                                </ul>
-                            </li>
+                        @endif
+                        @endforeach
                         </ul>
                     </div>
                     <!--/.nav-collapse -->

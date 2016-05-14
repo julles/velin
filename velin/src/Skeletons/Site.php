@@ -5,8 +5,10 @@
  * @author   Muhamad Reza Abdul Rohim <reza.wikrama3@gmail.com>
  * 
  */
-
+use DB;
 use App\Models\Menu;
+use App\Models\MenuAction;
+use App\Models\Action;
 
 class Site
 {
@@ -62,6 +64,11 @@ class Site
 		return request()->segment($int);
 	}
 
+	public function urlBackend($slug)
+	{
+		return url($this->backendUrl.'/'.$slug);
+	}
+
 	/**
      * Menggenrate Url Berdasarkan action nya.
      * 
@@ -70,7 +77,7 @@ class Site
      */
 	public function urlBackendAction($action)
 	{
-		return url($this->segment(1).$this->backendUrl.'/'.$action);
+		$this->urlBackend($this->segment(1).'/'.$slug);
 	}
 
 
@@ -85,9 +92,11 @@ class Site
 		return redirect($this->urlBackendAction($action));
 	}
 
-	public function addMenu($values = [])
+	public function addMenu($values = [],$actions = [])
 	{
-		$model = new Menu;
+		$model = new Menu();
+		$menuAction = new MenuAction();
+		$action = new Action();
 
 		$exist = $model->findBySlug($values['slug']);
 
@@ -100,13 +109,27 @@ class Site
 				$values['parent_id'] = $parentId;		
 			}
 
-			$model->create($values);
-		}
+				$menu = $model->create($values); // insert to menu
+
+				$dataActions = [];
+
+				foreach($actions as $act)
+				{
+					$actionId = $action->whereSlug($act)->first()->id;
+
+					$dataActions[] = ['menu_id' => $menu->id,'action_id'=>$actionId]; 
+				}
+				
+				$menuAction->insert($dataActions);
+
+			}
 	}
 
-	public function updateMenu($values = [])
+	public function updateMenu($values = [],$actions = [])
 	{
 		$model = Menu::findBySlug($values['slug']);
+		$menuAction = new MenuAction();
+		$action = new Action();
 
 		if(!empty($model->id))
 		{
@@ -117,7 +140,20 @@ class Site
 				$values['parent_id'] = $parentId;		
 			}
 			
-			$model->update($values);
+				$model->update($values);
+
+				$menuAction->whereMenuId($model->id)->delete();
+				
+				$dataActions = [];
+
+				foreach($actions as $act)
+				{
+					$actionId = $action->whereSlug($act)->first()->id;
+
+					$dataActions[] = ['menu_id' => $model->id,'action_id'=>$actionId]; 
+				}
+				
+				$menuAction->insert($dataActions);
 		}
 	}
 

@@ -17,4 +17,14 @@ class Menu extends Model
         'build_from' => 'title',
         'save_to'    => 'slug',
     ];
+
+    public function childs()
+    {
+    	return $this->hasMany(Menu::class , 'parent_id');
+    }
+
+    public function actions()
+    {
+        return $this->belongsToMany(Action::class,'menu_actions');
+    }
 }

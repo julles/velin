@@ -13,19 +13,19 @@ class MenuSeed extends Seeder
     {
     	\Velin::addMenu([
 			'parent_id'		=> null,
-			'title'			=> 'Bapak',
-			'order'			=> 1,
-			'controller'	=> 'DashboardController',
-			'slug'			=> 'bapak',
-		]);
+			'title'			=> 'Development',
+			'order'			=> 100,
+			'controller'	=> '#',
+			'slug'			=> 'development',
+		],['index','create','update']);
 
-			\Velin::addMenu([
-				'parent_id'		=> 'bapak',
-				'title'			=> 'Anak',
-				'order'			=> 1,
-				'controller'	=> 'AnakController',
-				'slug'			=> 'anak',
-			]);
+        // \Velin::updateMenu([
+        //     'parent_id'     => null,
+        //     'title'         => 'Development',
+        //     'order'         => 100,
+        //     'controller'    => '#',
+        //     'slug'          => 'development',
+        // ],['index','create']);
 
-    }
+	}
 }
