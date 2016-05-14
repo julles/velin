@@ -46,6 +46,7 @@
   
   <script type="text/javascript">
     $(function() {
+    $.fn.dataTable.ext.errMode = 'none';
     $('.table').DataTable({
         processing: true,
         serverSide: true,
