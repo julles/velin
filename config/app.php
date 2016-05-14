@@ -158,7 +158,8 @@ return [
         Velin\Providers\Site::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
 
     ],
 

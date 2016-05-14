@@ -5,6 +5,9 @@
  * @author   Muhamad Reza Abdul Rohim <reza.wikrama3@gmail.com>
  * 
  */
+
+use App\Models\Menu;
+
 class Site
 {
 	/**
@@ -81,5 +84,49 @@ class Site
 	{
 		return redirect($this->urlBackendAction($action));
 	}
+
+	public function addMenu($values = [])
+	{
+		$model = new Menu;
+
+		$exist = $model->findBySlug($values['slug']);
+
+		if(empty($exist->id))
+		{
+			if($values['parent_id'] != null)
+			{
+				$parentId = $model->findBySlug($values['parent_id'])->first()->id;
+
+				$values['parent_id'] = $parentId;		
+			}
+
+			$model->create($values);
+		}
+	}
+
+	public function updateMenu($values = [])
+	{
+		$model = Menu::findBySlug($values['slug']);
+
+		if(!empty($model->id))
+		{
+			if($values['parent_id'] != null)
+			{
+				$parentId = $model->findBySlug($values['parent_id'])->first()->id;
+
+				$values['parent_id'] = $parentId;		
+			}
+			
+			$model->update($values);
+		}
+	}
+
+	public function deleteMenu($slug)
+	{
+		$model = Menu::findBySlug($slug);
+
+		$model->delete();
+	}
+
 }
 

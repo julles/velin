@@ -2,7 +2,7 @@
 <html>
     
     <head>
-        <title>Forms</title>
+        <title>Velin</title>
         <!-- Bootstrap -->
         <link href="{{ asset(null) }}/velin/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="{{ asset(null) }}/velin/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
