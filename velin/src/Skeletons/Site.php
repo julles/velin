@@ -77,7 +77,7 @@ class Site
      */
 	public function urlBackendAction($action)
 	{
-		$this->urlBackend($this->segment(1).'/'.$slug);
+		return $this->urlBackend($this->segment(2).'/'.$action);
 	}
 
 
@@ -164,5 +164,126 @@ class Site
 		$model->delete();
 	}
 
+	public function injectModel($model)
+	{
+		$model = "App\\Models\\$model";
+
+		return new $model;
+	}
+
+	public function getMenu()
+	{
+		$model = Menu::findBySlug($this->segment(2));
+		
+		return $model;
+	}
+	
+	public function getAction()
+	{
+		$model = Action::whereSlug($this->segment(3))->first();
+
+		return $model;
+	}
+
+	public function labelAction()
+	{
+		return $this->getMenu()->title.' '.$this->getAction()->title;
+	}
+
+	public function buttonCreate()
+	{
+		$attributes = [
+			'class' => 'btn btn-primary btn-sm',
+			'style' => 'font-size:12px;'
+		];
+
+		$title = 'Add New';
+
+		$url = $this->urlBackendAction('create');
+
+		$button=\Html::link($url,$title,$attributes);
+		
+		return $button;
+	}
+
+	public function buttonDelete($id)
+	{
+		$attributes = [
+			'class' => 'btn btn-danger btn-sm',
+			'style' => 'font-size:12px;',
+			'onclick'	=> 'return confirm("are you sure want to delete this item ?")'
+		];
+
+		$title = 'Delete';
+
+		$url = $this->urlBackendAction('delete/'.$id);
+
+		$button=\Html::link($url,$title,$attributes);
+		
+		return $button;
+	}
+
+	public function buttonUpdate($id)
+	{
+		$attributes = [
+			'class' => 'btn btn-primary btn-sm',
+			'style' => 'font-size:12px;',
+		];
+
+		$title = 'Update';
+
+		$url = $this->urlBackendAction('update/'.$id);
+
+		$button=\Html::link($url,$title,$attributes);
+		
+		return $button;
+	}
+
+	public function buttons()
+	{
+		//
+	}
+
+	public function flash($data)
+	{
+		$data = json_encode($data);
+
+		$str = "
+		<script>
+			swal($data)
+		</script>";
+
+		return $str;
+	}
+
+	public function flashSuccess($text,$attributes = [])
+	{	
+		$properties = [
+			'type' 	=> 'success',
+			'title'	=> 'Success',
+			'text' => $text,
+		];
+
+		$properties = array_merge($properties,$attributes);
+
+		if(\Session::has('success'))
+		{
+			return $this->flash($properties);
+		}
+	}
+
+	public function flashValidation($title,$text,$attributes = [])
+	{	
+		$properties = [
+			'type' 	=> 'error',
+			'title'	=> $title,
+			'text'  => $text,
+			'html'	=> true,
+		];
+
+		$properties = array_merge($properties,$attributes);
+
+		return $this->flash($properties);
+	}
 }
 

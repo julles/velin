@@ -17,15 +17,15 @@ class MenuSeed extends Seeder
 			'order'			=> 100,
 			'controller'	=> '#',
 			'slug'			=> 'development',
-		],['index','create','update']);
+		],[]);
 
-        // \Velin::updateMenu([
-        //     'parent_id'     => null,
-        //     'title'         => 'Development',
-        //     'order'         => 100,
-        //     'controller'    => '#',
-        //     'slug'          => 'development',
-        // ],['index','create']);
+            \Velin::addMenu([
+                'parent_id'     => 'development',
+                'title'         => 'Action',
+                'order'         => 1,
+                'controller'    => 'ActionController',
+                'slug'          => 'action',
+            ],['index','update','delete','create']);
 
-	}
+    }
 }

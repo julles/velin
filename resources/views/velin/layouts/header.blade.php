@@ -7,6 +7,8 @@
         <link href="{{ asset(null) }}/velin/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="{{ asset(null) }}/velin/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="{{ asset(null) }}/velin/assets/styles.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
         <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ asset(null) }}/velin/vendors/flot/excanvas.min.js"></script><![endif]-->
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -45,7 +47,7 @@
                         @foreach($parentMenus as $parent)
                         @if($parent->childs()->count() == 0)
                             <li>
-                                <a href = "{{ Velin::urlBackend($parent->slug) }}">{{ $parent->title }}</a>
+                                <a href = "{{ Velin::urlBackend($parent->slug.'/index') }}">{{ $parent->title }}</a>
                             </li>
                         @else    
                             <li class="dropdown">
@@ -55,7 +57,7 @@
                                 <ul class="dropdown-menu">
                                     @foreach($parent->childs as $child)
                                         <li>
-                                            <a tabindex="-1" href="{{ Velin::urlBackend($child->slug) }}">{{ $child->title }}</a>
+                                            <a tabindex="-1" href="{{ Velin::urlBackend($child->slug.'/index') }}">{{ $child->title }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
