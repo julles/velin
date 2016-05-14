@@ -109,12 +109,12 @@ class Site
 
 		if(empty($exist->id))
 		{
-			if($values['parent_id'] != null)
-			{
-				$parentId = $model->findBySlug($values['parent_id'])->first()->id;
+				if($values['parent_id'] != null)
+				{
+					$parentId = $model->whereSlug($values['parent_id'])->first()->id;
 
-				$values['parent_id'] = $parentId;		
-			}
+					$values['parent_id'] = $parentId;		
+				}
 
 				$menu = $model->create($values); // insert to menu
 
