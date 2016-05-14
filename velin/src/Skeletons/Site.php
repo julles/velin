@@ -45,7 +45,7 @@ class Site
 	
 	public function config($config)
 	{
-		return config('config.'.$config);
+		return config('velin.'.$config);
 	}
 
 	/**
@@ -56,7 +56,7 @@ class Site
      */
 	public function segment($int)
 	{
-		return request->segment($int);
+		return request()->segment($int);
 	}
 
 	/**
@@ -81,7 +81,5 @@ class Site
 	{
 		return redirect($this->urlBackendAction($action));
 	}
-
-
 }
 

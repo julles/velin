@@ -1,6 +1,7 @@
 <?php
 return [
-	'titleBar'		=> 'Velin',
+	'titleBar'		=> 'Velin Admin Panel',
 	'appName'		=> 'Velin Admin Panel',
-	'backendUrl'	=> 'velin'
+	'backendUrl'	=> 'admin',
+	'footer'		=> '&copy; Velin 2016 | Muhamad Reza AR'
 ];
