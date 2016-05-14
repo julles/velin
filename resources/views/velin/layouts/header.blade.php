@@ -29,7 +29,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="{{ asset(null) }}/velin/#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Vincent Gabriel <i class="caret"></i>
+                                <a href="{{ asset(null) }}/velin/#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Muhamad Reza Abdul Rohim <i class="caret"></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
