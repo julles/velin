@@ -92,6 +92,13 @@ class Site
 		return redirect($this->urlBackendAction($action));
 	}
 
+	/**
+     * Menggenerate (Tambah) Menu.
+     * contoh bisa dilihat di database/seeds/MenuSeed.php
+     * 
+     * @param  array|array
+     * @return void
+     */
 	public function addMenu($values = [],$actions = [])
 	{
 		$model = new Menu();
@@ -125,6 +132,13 @@ class Site
 			}
 	}
 
+	/**
+     * Menggenerate (Update) Menu.
+     * contoh bisa dilihat di database/seeds/MenuSeed.php
+     * 
+     * @param  array|array
+     * @return void
+     */
 	public function updateMenu($values = [],$actions = [])
 	{
 		$model = Menu::findBySlug($values['slug']);
@@ -157,6 +171,13 @@ class Site
 		}
 	}
 
+	/**
+     * Menggenerate (menghapus) Menu.
+     * contoh bisa dilihat di database/seeds/MenuSeed.php
+     * 
+     * @param  string
+     * @return void
+     */
 	public function deleteMenu($slug)
 	{
 		$model = Menu::findBySlug($slug);
@@ -164,6 +185,13 @@ class Site
 		$model->delete();
 	}
 
+	/**
+     * Menginject class model merujuk ke path app/Models/.
+     * contoh penggunaan : Velin::injectModel('Modelnya')
+     * 
+     * @param  string
+     * @return obj
+     */
 	public function injectModel($model)
 	{
 		$model = "App\\Models\\$model";
@@ -171,6 +199,12 @@ class Site
 		return new $model;
 	}
 
+	/**
+     * Menginject class App\Models\Menu.
+     * contoh penggunaan : Velin::getMenu()->title
+     * 
+     * @return obj
+     */
 	public function getMenu()
 	{
 		$model = Menu::findBySlug($this->segment(2));
@@ -178,6 +212,12 @@ class Site
 		return $model;
 	}
 	
+	/**
+     * Menginject class App\Models\Action.
+     * contoh penggunaan : Velin::getAction()->title
+     * 
+     * @return obj
+     */
 	public function getAction()
 	{
 		$model = Action::whereSlug($this->segment(3))->first();
@@ -185,11 +225,21 @@ class Site
 		return $model;
 	}
 
+	/**
+     * Generate Label Action ( Titlte Menu | Title Action ).
+     * 
+     * @return string
+     */
 	public function labelAction()
 	{
 		return $this->getMenu()->title.' '.$this->getAction()->title;
 	}
 
+	/**
+     * Generate Link Create.
+     * 
+     * @return string
+     */
 	public function buttonCreate()
 	{
 		$attributes = [
@@ -206,6 +256,11 @@ class Site
 		return $button;
 	}
 
+	/**
+     * Generate Link Delete.
+     * 
+     * @return string
+     */
 	public function buttonDelete($id)
 	{
 		$attributes = [
@@ -223,10 +278,15 @@ class Site
 		return $button;
 	}
 
+	/**
+     * Generate Link Update.
+     * 
+     * @return string
+     */
 	public function buttonUpdate($id)
 	{
 		$attributes = [
-			'class' => 'btn btn-primary btn-sm',
+			'class' => 'btn btn-success btn-sm',
 			'style' => 'font-size:12px;',
 		];
 
@@ -244,7 +304,13 @@ class Site
 		//
 	}
 
-	public function flash($data)
+	/**
+     * Generate Flash Message menggunakan sweet alert.
+     *
+     * @param   array
+     * @return string
+     */
+	public function flash($data=[])
 	{
 		$data = json_encode($data);
 
@@ -256,6 +322,12 @@ class Site
 		return $str;
 	}
 
+	/**
+     * Generate Flash Message (Success) menggunakan sweet alert.
+     *
+     * @param   string|array
+     * @return string
+     */
 	public function flashSuccess($text,$attributes = [])
 	{	
 		$properties = [
@@ -272,6 +344,12 @@ class Site
 		}
 	}
 
+	/**
+     * Generate Flash Message Validation menggunakan sweet alert.
+     *
+     * @param   string|string|array
+     * @return string
+     */
 	public function flashValidation($title,$text,$attributes = [])
 	{	
 		$properties = [
