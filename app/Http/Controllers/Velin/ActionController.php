@@ -25,9 +25,7 @@ class ActionController extends VelinController
 
 		$data =  Table::of($model)
 		->addColumn('action' , function($model){
-			$update =  Velin::buttonUpdate($model->id);
-			$delete =  Velin::buttonDelete($model->id);
-			return $update.'|'.$delete;
+            return Velin::buttons($model->id);
 		})
 		->make(true);
 		

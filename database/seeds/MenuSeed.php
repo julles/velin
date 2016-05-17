@@ -71,7 +71,7 @@ class MenuSeed extends Seeder
 
             \Velin::addMenu([
                 'parent_id'     => 'manage-user',
-                'title'         => 'Action',
+                'title'         => 'Role',
                 'order'         => 1,
                 'controller'    => 'RoleController',
                 'slug'          => 'role',

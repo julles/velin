@@ -261,7 +261,7 @@ class Site
      * 
      * @return string
      */
-	public function buttonDelete($id)
+	public function buttonDelete($id="")
 	{
 		$attributes = [
 			'class' => 'btn btn-danger btn-sm',
@@ -283,7 +283,7 @@ class Site
      * 
      * @return string
      */
-	public function buttonUpdate($id)
+	public function buttonUpdate($id="")
 	{
 		$attributes = [
 			'class' => 'btn btn-success btn-sm',
@@ -299,9 +299,19 @@ class Site
 		return $button;
 	}
 
-	public function buttons()
+	public function buttons($id = "" , $plus = [])
 	{
-		//
+		$update =  $this->buttonUpdate($id);
+		$delete =  $this->buttonDelete($id);
+
+		$mergeButton = "";
+
+		foreach($plus as $add)
+		{
+			$mergeButton .= '|'.$add;
+		}
+
+		return $update.'|'.$delete.$mergeButton;
 	}
 
 	/**
