@@ -373,5 +373,15 @@ class Site
 
 		return $this->flash($properties);
 	}
+
+	public function unique($table,$field,$id="")
+	{
+		if(!empty($id))
+		{
+			$ifEdit = ','.$field.','.$id;
+		}
+
+		return 'unique:'.$table.$ifEdit;
+	}
 }
 
