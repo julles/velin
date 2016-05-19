@@ -1,6 +1,6 @@
 <?php namespace Velin\Skeletons;
 /**
- * Velin Admin Panel - Baceknd For Laravel 5
+ * Velin Admin Panel - Backend For Laravel 5
  *
  * @author   Muhamad Reza Abdul Rohim <reza.wikrama3@gmail.com>
  * 

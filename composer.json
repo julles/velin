@@ -26,7 +26,10 @@
         "psr-4": {
             "App\\": "app/",
             "Velin\\": "velin/src/"
-        }
+        },
+        "files":[
+            "velin/src/Skeletons/auto_functions.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [

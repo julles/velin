@@ -52,7 +52,7 @@ class ActionController extends VelinController
 
     	$model->create($request->all());
 
-    	return Velin::redirectBackendAction('index')->withSuccess('Data has been saved');
+    	return redirectBackendAction('index')->withSuccess('Data has been saved');
     }
 
     public function getUpdate($id)
@@ -70,13 +70,12 @@ class ActionController extends VelinController
 
     	$model->update($request->all());
 
-    	return Velin::redirectBackendAction('index')->withSuccess('Data has been updated');
+    	return redirectBackendAction('index')->withSuccess('Data has been updated');
     }
 
     public function getDelete($id)
     {
     	$model = $this->model->destroy($id);
-    	return Velin::redirectBackendAction('index')->withSuccess('Data has been deleted');
-    
+    	return redirectBackendAction('index')->withSuccess('Data has been deleted');
     }
 }
