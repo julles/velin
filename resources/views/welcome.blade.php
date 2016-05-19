@@ -38,7 +38,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">{{ Velin::config('backendUrl') }}</div>
+                <div class="title">velin</div>
             </div>
         </div>
     </body>
