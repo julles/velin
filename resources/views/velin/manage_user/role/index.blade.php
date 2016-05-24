@@ -60,6 +60,7 @@
   </script>
 
   {!! Velin::flashSuccess(Session::get('success'))  !!}
+  {!! Velin::flashSuccess(Session::get('success'))  !!}
   
 
 @endsection

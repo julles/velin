@@ -9,10 +9,10 @@ class Role extends Model
 {
     public $guarded = [];
 
-    public function rules($id)
+    public function rules($id="")
     {
     	return [
-    		'role'	=> Velin::unique('roles','role',$id),
+    		'role'	=> 'required|'.Velin::unique('roles','role',$id),
     	];
     }
 }

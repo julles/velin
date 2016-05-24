@@ -355,6 +355,29 @@ class Site
 	}
 
 	/**
+     * Generate Flash Message (Info) menggunakan sweet alert.
+     *
+     * @param   string|array
+     * @return string
+     */
+	public function flashInfo($text,$attributes = [])
+	{	
+		$properties = [
+			'type' 	=> 'info',
+			'title'	=> 'Info',
+			'text' => $text,
+		];
+
+		$properties = array_merge($properties,$attributes);
+
+		if(\Session::has('info'))
+		{
+			return $this->flash($properties);
+		}
+	}
+
+
+	/**
      * Generate Flash Message Validation menggunakan sweet alert.
      *
      * @param   string|string|array
@@ -379,6 +402,8 @@ class Site
 		if(!empty($id))
 		{
 			$ifEdit = ','.$field.','.$id;
+		}else{
+			$ifEdit = "";
 		}
 
 		return 'unique:'.$table.$ifEdit;
