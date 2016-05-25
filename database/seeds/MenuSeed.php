@@ -76,6 +76,22 @@ class MenuSeed extends Seeder
                 'controller'    => 'RoleController',
                 'slug'          => 'role',
             ],['index','update','delete','create']);
+
+            \Velin::addMenu([
+                'parent_id'     => 'manage-user',
+                'title'         => 'Role',
+                'order'         => 1,
+                'controller'    => 'RoleController',
+                'slug'          => 'role',
+            ],['index','update','delete','create']);
+
+            \Velin::addMenu([
+                'parent_id'     => 'manage-user',
+                'title'         => 'User',
+                'order'         => 2,
+                'controller'    => 'UserController',
+                'slug'          => 'user',
+            ],['index','update','delete','create']);
         // 
     }
 }

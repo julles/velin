@@ -3,24 +3,27 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    // protected $hidden = [
+    //     'password', 'remember_token',
+    // ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    // public $guarded = ['verify_password'];
+
+    // public function rules($id="")
+    // {
+    // 	return rules[
+    // 		'name'	=> 'required|max:255',
+    // 		'username'	=> 'required|max:15|'.Velin::unique('users','username',$id),
+    // 		'role_id'	=> 'required'
+    // 	];
+    // }
+
+    // public function role()
+    // {
+    //     return $this->belongsTo(Role::class,'role_id');
+    // }
 }

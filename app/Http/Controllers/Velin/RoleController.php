@@ -79,7 +79,6 @@ class RoleController extends VelinController
     public function getDelete($id)
     {
         $model  = $this->model->findOrFail($id);
-
         try
         {
             $model->delete();
