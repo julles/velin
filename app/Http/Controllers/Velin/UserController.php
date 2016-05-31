@@ -9,7 +9,7 @@ use App\Http\Controllers\Velin\VelinController;
 use App\Models\User;
 use App\Models\Role;
 use Table;
-use Velin;
+
 
 class UserController extends VelinController
 {
@@ -35,7 +35,7 @@ class UserController extends VelinController
 
     	$data = Table::of($model)
     		->addColumn('action' , function($model){
-    			return Velin::buttons($model->id);
+    			return \Velin::buttons($model->id);
     		})
     		->make(true);
 

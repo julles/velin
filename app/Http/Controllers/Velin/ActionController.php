@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Velin\VelinController;
 use Table;
 use App\Models\Action;
-use Velin;
+
 
 class ActionController extends VelinController
 {
@@ -25,7 +25,7 @@ class ActionController extends VelinController
 
 		$data =  Table::of($model)
 		->addColumn('action' , function($model){
-            return Velin::buttons($model->id);
+            return \Velin::buttons($model->id);
 		})
 		->make(true);
 		

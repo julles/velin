@@ -2,7 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 
-use Velin\Skeletons\Site;
+use Velin\Skeletons\Site as SiteSkeleton;
 
 class Site extends ServiceProvider
 {
@@ -31,7 +31,7 @@ class Site extends ServiceProvider
 
 	
 		$this->app->bind('register-site' , function(){
-			return new Site;
+			return new SiteSkeleton;
 		});
 	}
 }

@@ -19,4 +19,9 @@ class MenuAction extends Model
     {
     	return $this->belongsTo(Action::class,'action_id');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class,'rights','role_id','menu_action_id');
+    }
 }

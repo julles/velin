@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Velin\VelinController;
 use Table;
-use Velin;
 use App\Models\Role;
 
 class RoleController extends VelinController
@@ -26,7 +25,7 @@ class RoleController extends VelinController
 
     	$data = Table::of($model)
     		->addColumn('action' , function($model){
-    			return Velin::buttons($model->id);
+    			return \Velin::buttons($model->id);
     		})
     		->make(true);
 
