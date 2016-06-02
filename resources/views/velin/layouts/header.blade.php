@@ -9,6 +9,7 @@
         <link href="{{ asset(null) }}/velin/assets/styles.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset(null) }}velin/css/velin.css">
         <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ asset(null) }}/velin/vendors/flot/excanvas.min.js"></script><![endif]-->
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>

@@ -299,10 +299,32 @@ class Site
 		return $button;
 	}
 
+	/**
+     * Generate Link View.
+     * 
+     * @return string
+     */
+	public function buttonView($id="")
+	{
+		$attributes = [
+			'class' => 'btn btn-default btn-sm',
+			'style' => 'font-size:12px;',
+		];
+
+		$title = 'View';
+
+		$url = $this->urlBackendAction('view/'.$id);
+
+		$button=\Html::link($url,$title,$attributes);
+		
+		return $button;
+	}
+
 	public function buttons($id = "" , $plus = [])
 	{
 		$update =  $this->buttonUpdate($id);
 		$delete =  $this->buttonDelete($id);
+		$view =  $this->buttonView($id);
 
 		$mergeButton = "";
 
@@ -311,7 +333,7 @@ class Site
 			$mergeButton .= '|'.$add;
 		}
 
-		return $update.'|'.$delete.$mergeButton;
+		return $update.'|'.$delete.'|'.$view.$mergeButton;
 	}
 
 	/**

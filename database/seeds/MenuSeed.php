@@ -92,14 +92,6 @@ class MenuSeed extends Seeder
                 'controller'    => 'UserController',
                 'slug'          => 'user',
             ],['index','update','delete','create']);
-
-            \Velin::addMenu([
-                'parent_id'     => 'manage-user',
-                'title'         => 'User Access',
-                'order'         => 3,
-                'controller'    => 'RightController',
-                'slug'          => 'user-access',
-            ],['index','update','delete','create']);
         // 
     }
 }

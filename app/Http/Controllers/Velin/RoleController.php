@@ -7,16 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Velin\VelinController;
 use Table;
+
 use App\Models\Role;
+use App\Models\Menu;
 
 class RoleController extends VelinController
 {
-	public $model;
-
-    public function __construct(Role $model)
+	public function __construct(Role $model,Menu $menu)
     {
     	parent::__construct();
     	$this->model = $model;
+        $this->menu = $menu;
     }
 
     public function getData()
@@ -85,5 +86,20 @@ class RoleController extends VelinController
         }catch(\Exception $e){
             return redirectBackendAction('index')->flashInfo('Data cannot be deleted');
         }
+    }
+
+    public function getView($id)
+    {
+        $model = $this->model->findOrFail($id);
+
+        $menus = $this->menu
+            ->where('slug','!=','development')
+            ->whereParentId(null)
+            ->get();
+
+        return view('velin.manage_user.role.view' ,[
+            'model' => $model,
+            'menus' => $menus,
+        ]);
     }
 }
