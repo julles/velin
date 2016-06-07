@@ -21,6 +21,14 @@ class AddFieldRoleIdInUsersTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });
+
+        \DB::table('users')
+            ->insert([
+                'role_id'   => 1,
+                'name'      => 'Super Admin',
+                'username'  => 'superadmin',
+                'password'  => \Hash::make('superadmin'),
+            ]);
     }
 
     /**

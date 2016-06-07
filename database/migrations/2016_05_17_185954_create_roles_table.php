@@ -17,6 +17,9 @@ class CreateRolesTable extends Migration
             $table->string('role');
             $table->timestamps();
         });
+
+        \DB::table('roles')
+            ->insert(['id' => 1,'role'=>'Super Admin']);
     }
 
     /**

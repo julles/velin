@@ -1,5 +1,6 @@
 <?php
-Route::group(['prefix' => \Velin::config('backendUrl')] , function(){
+
+Route::group(['middleware'=>'auth','prefix' => \Velin::config('backendUrl')] , function(){
 	
 	Route::get('/','Velin\DefaultController@index');
 
