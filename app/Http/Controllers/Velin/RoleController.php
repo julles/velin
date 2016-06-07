@@ -35,7 +35,7 @@ class RoleController extends VelinController
 
     public function getIndex()
     {
-    	return view('velin.manage_user.role.index');
+        return view('velin.manage_user.role.index');
     }
 
     public function getCreate()
@@ -91,15 +91,57 @@ class RoleController extends VelinController
     public function getView($id)
     {
         $model = $this->model->findOrFail($id);
-
         $menus = $this->menu
             ->where('slug','!=','development')
             ->whereParentId(null)
             ->get();
 
+        $cek = function($menuActionId) use ($model){
+            return $this->cek($model->id,$menuActionId);
+        };
+
+
         return view('velin.manage_user.role.view' ,[
             'model' => $model,
             'menus' => $menus,
+            'cek'   => $cek,
         ]);
+    }
+
+    public function postView(Request $request,$id)
+    {
+        $model = $this->model->findOrFail($id);
+
+        $right = injectModel('Right');
+
+        $count = count($request->menu_action_id);
+
+        $right->whereRoleId($model->id)->delete();
+
+        $records = [];
+
+        for($a=0;$a<$count;$a++)
+        {
+            $records[] = [
+                'role_id'   => $model->id,
+                'menu_action_id'   => $request->menu_action_id[$a],
+            ];
+        }
+
+        $insert = $right->insert($records);
+
+            return redirectBackendAction('index')
+                ->withSuccess('Data has been updated');
+        
+    }
+
+    public function cek($roleId,$menuActionId)
+    {
+        $cek = \Velin::cekRight($roleId,$menuActionId);
+
+        if($cek == 'true')
+        {
+            return 'checked="checked"';
+        }
     }
 }

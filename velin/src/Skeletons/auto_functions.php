@@ -22,3 +22,10 @@ function urlBackendAction($action)
 {
 	return velin()->urlBackendAction($action);
 }
+
+function injectModel($model)
+{
+	$masterModel = 'App\\Models\\'.$model;
+
+	return new $masterModel();
+}

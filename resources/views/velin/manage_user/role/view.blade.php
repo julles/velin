@@ -24,9 +24,8 @@
                                   <table class="table table-striped">
                                     <thead>
                                       <tr>
-                                          <th>No.</th>
-                                          <th>Menu</th>
-                                          <th>Action</th>
+                                          <th width="50%">Menu</th>
+                                          <th width="50%">Action</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -34,10 +33,20 @@
                                     @foreach($menus as $parent)
                                     @php($no++)  
                                       <tr>
-                                        <td>{{ $no }}</td>
-                                        <td>{{ $parent->title }}</td>
-                                        <td>3</td>
+                                        <td colspan="2">{{ $parent->title }}</td>
                                       </tr>
+                                        @foreach(injectModel('Menu')->whereParentId($parent->id)->get() as $child)
+                                            <tr>
+                                              <td colspan="2" style = 'padding-left:20px;'>{{ $child->title }}</td>
+                                            </tr> 
+                                             @foreach($child->actions as $action) 
+                                              <tr>
+                                                <td style="padding-left:60px;">{{ $action->title }}</td>
+                                                <td><input {{ $cek($action->pivot->id) }} type = 'checkbox' name = 'menu_action_id[]' value = '{{ $action->pivot->id }}' /></td>
+                                              </tr>
+                                             @endforeach
+                                        @endforeach
+
                                     @endforeach
                                     </tbody>
                                   </table>

@@ -127,8 +127,7 @@ class Site
 					$dataActions[] = ['menu_id' => $menu->id,'action_id'=>$actionId]; 
 				}
 				
-				$menuAction->insert($dataActions);
-
+				$menuAction->insert($dataActions); // insert to menu_actions table
 			}
 	}
 
@@ -149,7 +148,7 @@ class Site
 		{
 			if($values['parent_id'] != null)
 			{
-				$parentId = $model->findBySlug($values['parent_id'])->first()->id;
+				$parentId = $model->whereSlug($values['parent_id'])->first()->id;
 
 				$values['parent_id'] = $parentId;		
 			}
@@ -430,5 +429,19 @@ class Site
 
 		return 'unique:'.$table.$ifEdit;
 	}
+
+	public function cekRight($roleId,$menuActionId)
+    {
+        $model = injectModel('Role')->find($roleId);
+
+        $rights = $model->rights()->select('menu_action_id')->find($menuActionId);
+
+        if(!empty($rights->menu_action_id))
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 

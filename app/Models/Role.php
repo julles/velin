@@ -22,8 +22,8 @@ class Role extends Model
     	return $this->hasMany(User::class,'role_id');
     }
 
-    public function menuActions()
+    public function rights()
     {
-        return $this->belongsToMany(MenuAction::class,'rights','menu_action_id','role_id');
+        return $this->belongsToMany(MenuAction::class,'rights','role_id','menu_action_id');
     }
 }
