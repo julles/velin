@@ -9,7 +9,7 @@ use App\Http\Controllers\Velin\VelinController;
 
 class DefaultController extends VelinController
 {
-    public function index()
+    public function getIndex()
     {
     	return view('velin.default.index');
     }

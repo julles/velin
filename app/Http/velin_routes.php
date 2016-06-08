@@ -1,8 +1,8 @@
 <?php
 
-Route::group(['middleware'=>'auth','prefix' => \Velin::config('backendUrl')] , function(){
+Route::group(['middleware'=>['auth','right'],'prefix' => \Velin::config('backendUrl')] , function(){
 	
-	Route::get('/','Velin\DefaultController@index');
+	Route::controller('default','Velin\DefaultController');
 
 	$path = app_path('Http/Controllers/Velin/');
 

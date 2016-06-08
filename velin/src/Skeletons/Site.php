@@ -204,9 +204,11 @@ class Site
      * 
      * @return obj
      */
-	public function getMenu()
+	public function getMenu($menu = "")
 	{
-		$model = Menu::findBySlug($this->segment(2));
+		$segment = ($menu == "") ? $this->segment(2) : $menu;
+
+		$model = Menu::findBySlug($segment);
 		
 		return $model;
 	}
@@ -252,7 +254,12 @@ class Site
 
 		$button=\Html::link($url,$title,$attributes);
 		
-		return $button;
+		if($this->cekRight('create') == true)
+		{
+			return $button;
+		}else{
+			return "";
+		}
 	}
 
 	/**
@@ -274,7 +281,12 @@ class Site
 
 		$button=\Html::link($url,$title,$attributes);
 		
-		return $button;
+		if($this->cekRight('delete') == true)
+		{
+			return $button;
+		}else{
+			return "";
+		}
 	}
 
 	/**
@@ -295,7 +307,12 @@ class Site
 
 		$button=\Html::link($url,$title,$attributes);
 		
-		return $button;
+		if($this->cekRight('update') == true)
+		{
+			return $button;
+		}else{
+			return "";
+		}
 	}
 
 	/**
@@ -316,7 +333,12 @@ class Site
 
 		$button=\Html::link($url,$title,$attributes);
 		
-		return $button;
+		if($this->cekRight('view') == true)
+		{
+			return $button;
+		}else{
+			return "";
+		}
 	}
 
 	public function buttons($id = "" , $plus = [])
@@ -332,7 +354,16 @@ class Site
 			$mergeButton .= '|'.$add;
 		}
 
-		return $update.'|'.$delete.'|'.$view.$mergeButton;
+		$buttons = [$update,$delete,$view];
+
+		$result = "";
+
+		foreach($buttons as $button)
+		{
+			$result .= $button.' ';
+		}
+
+		return $result.' '.$mergeButton;
 	}
 
 	/**
@@ -430,7 +461,7 @@ class Site
 		return 'unique:'.$table.$ifEdit;
 	}
 
-	public function cekRight($roleId,$menuActionId)
+	public function cekRightRoleMenuAction($roleId,$menuActionId)
     {
         $model = injectModel('Role')->find($roleId);
 
@@ -443,5 +474,33 @@ class Site
             return false;
         }
     }
+
+    public function cekRigtMenuAction($action = "" , $menu = "")
+    {
+    	
+    	$slugAction = (empty($action)) ? request()->segment(3) : $action;
+
+    	$slugMenu = (!empty($menu)) ? $menu : $this->segment(2);
+
+		$menu = $this->getMenu($slugMenu);
+
+		$menuAction = $menu->actions()
+			->whereSlug($slugAction)
+			->first();
+
+		if(!empty($menuAction->pivot->id))
+		{
+			$menuActionId = $menuAction->pivot->id;
+
+			return $right = $this->cekRightRoleMenuAction(user()->role_id,$menuActionId);
+		}else{
+    		return false;
+		}	
+	}
+
+	public function cekRight($action)
+	{
+		return $this->cekRigtMenuAction($action,$this->segment(2));
+	}
 }
 

@@ -19,7 +19,7 @@ class LoginController extends Controller
     {
     	if(Auth::attempt(['username' => $request->username,'password' => $request->password]))
     	{
-    		return redirect('admin');
+    		return redirect('admin/default');
     	}else{
     		return redirect()->back()->withInput()->with('info','Account Not Found!');
     	}

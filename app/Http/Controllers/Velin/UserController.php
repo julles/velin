@@ -44,7 +44,7 @@ class UserController extends VelinController
 
     public function getIndex()
     {
-    	return view('velin.manage_user.user.index');
+        return view('velin.manage_user.user.index');
     }
 
     public function getCreate()
