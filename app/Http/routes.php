@@ -3,7 +3,6 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
-
 Route::controller('login-page','Velin\LoginController');
 
 

@@ -45,15 +45,14 @@ class RoleController extends VelinController
         ]);
     }
 
-    public function postCreate(Request $request)
+    public function postCreate(Requests\Velin\RoleRequest $request)
     {
         $model = $this->model;
 
-        $this->validate($request,$model->rules());
-    
         $model->create($request->all());
 
-        return redirectBackendAction('index')->withSuccess('Data has been saved');
+        return redirectBackendAction('index')
+            ->withSuccess('Data has been saved');
     }
 
     public function getUpdate($id)
@@ -65,15 +64,14 @@ class RoleController extends VelinController
         ]);
     }
 
-    public function postUpdate(Request $request,$id)
+    public function postUpdate(Requests\Velin\RoleRequest $request,$id)
     {
         $model = $this->model->findOrFail($id);
 
-        $this->validate($request,$model->rules($id));
-
         $model->updated($request->all());
 
-        return redirectBackendAction('index')->withSuccess('Data has been updated');
+        return redirectBackendAction('index')
+            ->withSuccess('Data has been updated');
     }
 
     public function getDelete($id)
@@ -82,9 +80,11 @@ class RoleController extends VelinController
         try
         {
             $model->delete();
-            return redirectBackendAction('index')->withSuccess('Data has been deleted');
+            return redirectBackendAction('index')
+                ->withSuccess('Data has been deleted');
         }catch(\Exception $e){
-            return redirectBackendAction('index')->flashInfo('Data cannot be deleted');
+            return redirectBackendAction('index')
+                ->flashInfo('Data cannot be deleted');
         }
     }
 

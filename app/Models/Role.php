@@ -8,14 +8,7 @@ use App\Models\User;
 
 class Role extends Model
 {
-    public $guarded = [];
-
-    public function rules($id="")
-    {
-    	return [
-    		'role'	=> 'required|'.Velin::unique('roles','role',$id),
-    	];
-    }
+    public $fillable = ['role'];
 
     public function user()
     {
