@@ -29,3 +29,8 @@ function injectModel($model)
 
 	return new $masterModel();
 }
+
+function user()
+{
+	return \Auth::user();
+}
