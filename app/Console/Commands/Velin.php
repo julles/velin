@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class VelinMenu extends Command
+class Velin extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'velin';
+    protected $signature = 'velin:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Velin Command';
+    protected $description = 'Installing Velin';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,13 @@ class VelinMenu extends Command
      */
     public function handle()
     {
-        //
+        $this->info("Prepare Install");
+        $this->info("Installing");
+        \Artisan::call('migrate');
+        \Artisan::call('db:seed');
+        $this->info("Selesai");
+        $this->info("Jalan kan velin di url http://localhost:8000");
+        \Artisan::call('serve');
+        
     }
 }

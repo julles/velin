@@ -85,7 +85,6 @@ class MenuSeed extends Seeder
                 'slug'          => 'user',
             ],['index','update','delete','create']);
 
-            \Velin::deleteMenu('wow');
         // 
     }
 }

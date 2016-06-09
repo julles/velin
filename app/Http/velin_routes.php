@@ -1,17 +1,21 @@
 <?php
 
-Route::group(['middleware'=>['auth','right'],'prefix' => \Velin::config('backendUrl')] , function(){
-	
-	Route::controller('default','Velin\DefaultController');
+if(request()->segment(1) == \Velin::config('backendUrl'))
+{
 
-	$path = app_path('Http/Controllers/Velin/');
+	Route::group(['middleware'=>['auth','right'],'prefix' => \Velin::config('backendUrl')] , function(){
+		
+		Route::controller('default','Velin\DefaultController');
 
-	foreach(\Velin::injectModel('Menu')->where('controller','!=','#')->get() as $route)
-	{
-		if(file_exists($path.$route->controller.'.php'))
+		$path = app_path('Http/Controllers/Velin/');
+
+		foreach(\Velin::injectModel('Menu')->where('controller','!=','#')->get() as $route)
 		{
-			Route::controller($route->slug,'Velin\\'.$route->controller);
+			if(file_exists($path.$route->controller.'.php'))
+			{
+				Route::controller($route->slug,'Velin\\'.$route->controller);
+			}
 		}
-	}
 
-});
+	});
+}
