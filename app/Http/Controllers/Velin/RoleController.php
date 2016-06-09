@@ -92,7 +92,7 @@ class RoleController extends VelinController
     {
         $model = $this->model->findOrFail($id);
         $menus = $this->menu
-            ->where('slug','!=','development')
+            //->where('slug','!=','development')
             ->whereParentId(null)
             ->get();
 
@@ -137,7 +137,7 @@ class RoleController extends VelinController
 
     public function cek($roleId,$menuActionId)
     {
-        $cek = \Velin::cekRight($roleId,$menuActionId);
+        $cek = \Velin::cekRightRoleMenuAction($roleId,$menuActionId);
 
         if($cek == 'true')
         {

@@ -498,6 +498,25 @@ class Site
 		}	
 	}
 
+	public function countChildAndGetIndex($parent)
+	{
+		$getChilds = $parent->childs()->select('slug')->get()->toArray();
+        
+        $countChild = false;
+        
+        foreach($getChilds as $slugChild)
+        {
+            $cekChildIndex = $this->cekRigtMenuAction('index',$slugChild);
+
+            if($cekChildIndex == true)
+            {
+                $countChild = true;
+            }
+        }
+
+        return $countChild;
+	}
+
 	public function cekRight($action)
 	{
 		return $this->cekRigtMenuAction($action,$this->segment(2));

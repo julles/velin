@@ -45,26 +45,7 @@
                             </li>
                         </ul>
                         <ul class="nav">
-                        @foreach($parentMenus as $parent)
-                        @if($parent->childs()->count() == 0)
-                            <li>
-                                <a href = "{{ Velin::urlBackend($parent->slug.'/index') }}">{{ $parent->title }}</a>
-                            </li>
-                        @else    
-                            <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                                    {{ $parent->title }} <i class="caret"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    @foreach($parent->childs as $child)
-                                        <li>
-                                            <a tabindex="-1" href="{{ Velin::urlBackend($child->slug.'/index') }}">{{ $child->title }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endif
-                        @endforeach
+                        @include('velin.layouts.menu')
                         </ul>
                     </div>
                     <!--/.nav-collapse -->
