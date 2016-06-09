@@ -109,26 +109,47 @@ class Site
 
 		if(empty($exist->id))
 		{
+			\DB::beginTransaction();
+
+			try
+			{
 				if($values['parent_id'] != null)
-				{
-					$parentId = $model->whereSlug($values['parent_id'])->first()->id;
+					{
+						$parentId = $model->whereSlug($values['parent_id'])->first()->id;
 
-					$values['parent_id'] = $parentId;		
-				}
+						$values['parent_id'] = $parentId;		
+					}
 
-				$menu = $model->create($values); // insert to menu
+					$menu = $model->create($values); // insert to menu
 
-				$dataActions = [];
+					$dataActions = [];
 
-				foreach($actions as $act)
-				{
-					$actionId = $action->whereSlug($act)->first()->id;
+					foreach($actions as $act)
+					{
+						$actionId = $action->whereSlug($act)->first()->id;
 
-					$dataActions[] = ['menu_id' => $menu->id,'action_id'=>$actionId]; 
-				}
-				
-				$menuAction->insert($dataActions); // insert to menu_actions table
+						$dataActions[] = ['menu_id' => $menu->id,'action_id'=>$actionId]; 
+					}
+					
+					$insertMenuAction = $menuAction->insert($dataActions); // insert to menu_actions table
+					
+					$menuActionsNew = $menuAction->select('id')->whereMenuId($menu->id)->get()->toArray();
+
+					$newArray = [];
+
+					foreach($menuActionsNew as $new)
+					{
+						$newArray[] = ['menu_action_id' => $new['id'] ,'role_id' => 1];
+					}
+
+					$insertRight = injectModel('Right')->insert($newArray);
+					\DB::commit();
+
+			}catch(\Exception $e){
+				\DB::rollback();
+				echo $e->getMessage();
 			}
+		}				
 	}
 
 	/**
@@ -167,6 +188,18 @@ class Site
 				}
 				
 				$menuAction->insert($dataActions);
+
+				$menuActionsNew = $menuAction->select('id')->whereMenuId($model->id)->get()->toArray();
+
+				$newArray = [];
+
+				foreach($menuActionsNew as $new)
+				{
+					$newArray[] = ['menu_action_id' => $new['id'] ,'role_id' => 1];
+				}
+
+				$insertRight = injectModel('Right')->insert($newArray);
+				
 		}
 	}
 
