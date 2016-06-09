@@ -23,7 +23,9 @@ class VelinRight
         {
             if(!empty($action)) // jika action tidak kosong
             {
-                if($action != 'data') // jika action != data
+                $actions = injectModel('Action')->select('slug')->get()->toArray();
+
+                if(in_array($action,$actions)) // jika action terdaftar di table action
                 {
                     $cek = \Velin::cekRight($action); // cek action ada atau tidak
 
@@ -33,12 +35,9 @@ class VelinRight
                     }else{
                         return $next($request); // jika ada teruskan request
                     }
-            
-                }else{ // jika action sama dengan data
-                    return $next($request); // lanjutkan request
-                
+                }else{
+                        return $next($request); // jika ada teruskan request
                 }
-                
             }else{ // jika action kosong
 
                 abort(404); // lempar 404

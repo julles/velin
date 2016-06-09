@@ -26,7 +26,7 @@
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="{{ asset(null) }}/velin/#">{{ Velin::config('titleBar') }}</a>
+                    <a class="brand" href="{{ Velin::urlBackend('default/index') }}">{{ Velin::config('titleBar') }}</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
@@ -35,7 +35,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="{{ asset(null) }}/velin/#">Profile</a>
+                                        <a tabindex="-1" href="{{ urlBackend('user/profile') }}">Profile</a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>

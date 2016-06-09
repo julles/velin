@@ -106,4 +106,20 @@ class UserController extends VelinController
             return redirectBackendAction('index')->flashInfo('Data cannot be deleted');
         }
     }
+
+    public function getProfile()
+    {
+        $model = $this->model->findORFail(user()->id);
+
+        return view('velin.manage_user.user.profile' , compact('model'));
+    }
+
+    public function postProfile(Requests\Velin\UserProfile $request)
+    {
+        $model = $this->model->findORFail(user()->id);
+        
+        $model->update($request->all());
+
+        return redirect()->back()->withSuccess('Data has been updated');
+    }
 }

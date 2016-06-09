@@ -13,6 +13,11 @@ function velin()
 	return new \Velin\Skeletons\Site();
 }
 
+function urlBackend($slug)
+{
+	return velin()->urlBackend($slug);
+}
+
 function redirectBackendAction($action)
 {
 	return velin()->redirectBackendAction($action);
