@@ -41,6 +41,7 @@ class Velin extends Command
         $this->info("Installing");
         \Artisan::call('migrate');
         \Artisan::call('db:seed');
+        \Artisan::call('key:generate');
         $this->info("Selesai");
         $this->info("Jalan kan velin di url http://localhost:8000");
         \Artisan::call('serve');
