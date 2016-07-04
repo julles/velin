@@ -26,6 +26,8 @@ lalu jalan kan script artisan command berikut
 php artisan velin:install
 ```
 
+buka di url : yoururl.dev/login-page
+
 username : superadmin
 
 password : superadmin

@@ -554,5 +554,40 @@ class Site
 	{
 		return $this->cekRigtMenuAction($action,$this->segment(2));
 	}
+
+	public function simpleCreate($model,$request,$url="")
+	{
+		$model->create($request->all());
+
+		$fixUrl = !empty($url) ? $url : 'index';
+
+        return redirectBackendAction($fixUrl)
+            	->withSuccess('Data has been saved');
+	}
+
+	public function simpleUpdate($model,$request,$url="")
+	{
+		$model->update($request->all());
+
+		$fixUrl = !empty($url) ? $url : 'index';
+
+        return redirectBackendAction($fixUrl)
+            	->withSuccess('Data has been updated');
+	}
+
+	public function simpleDelete($model , $url="")
+	{
+		$fixUrl = !empty($url) ? $url : 'index';
+
+		try
+        {
+            $model->delete();
+            return redirectBackendAction($fixUrl)
+                ->withSuccess('Data has been deleted');
+        }catch(\Exception $e){
+            return redirectBackendAction($fixUrl)
+                ->flashInfo('Data cannot be deleted');
+        }
+	}
 }
 

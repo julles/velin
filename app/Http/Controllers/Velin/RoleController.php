@@ -47,12 +47,7 @@ class RoleController extends VelinController
 
     public function postCreate(Requests\Velin\RoleRequest $request)
     {
-        $model = $this->model;
-
-        $model->create($request->all());
-
-        return redirectBackendAction('index')
-            ->withSuccess('Data has been saved');
+        return velin()->simpleCreate($this->model,$request);
     }
 
     public function getUpdate($id)
@@ -66,33 +61,18 @@ class RoleController extends VelinController
 
     public function postUpdate(Requests\Velin\RoleRequest $request,$id)
     {
-        $model = $this->model->findOrFail($id);
-
-        $model->updated($request->all());
-
-        return redirectBackendAction('index')
-            ->withSuccess('Data has been updated');
+        return velin()->simpleUpdate($this->model->findOrFail($id),$request);
     }
 
     public function getDelete($id)
     {
-        $model  = $this->model->findOrFail($id);
-        try
-        {
-            $model->delete();
-            return redirectBackendAction('index')
-                ->withSuccess('Data has been deleted');
-        }catch(\Exception $e){
-            return redirectBackendAction('index')
-                ->flashInfo('Data cannot be deleted');
-        }
+        return velin()->simpleDelete($this->model->findOrFail($id));
     }
 
     public function getView($id)
     {
         $model = $this->model->findOrFail($id);
         $menus = $this->menu
-            //->where('slug','!=','development')
             ->whereParentId(null)
             ->get();
 
