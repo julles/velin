@@ -58,6 +58,14 @@ class MenuSeed extends Seeder
                 'slug'          => 'action',
             ],['index','update','delete','create']);
 
+            \Velin::addMenu([
+                'parent_id'     => 'development',
+                'title'         => 'Crud Example',
+                'order'         => 2,
+                'controller'    => 'CrudExampleController',
+                'slug'          => 'crud-example',
+            ],['index','update','delete','create']);
+
         // end development
         
         // start users
